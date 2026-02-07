@@ -1,26 +1,23 @@
 package com.syntax.quotesapp
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.syntax.quotesapp.models.Quote
+import androidx.compose.ui.unit.dp
 import com.syntax.quotesapp.screens.QuoteDetail
-
 import com.syntax.quotesapp.screens.QuoteListScreen
 import com.syntax.quotesapp.ui.theme.DataManager
 import com.syntax.quotesapp.ui.theme.QuotesAppTheme
@@ -38,9 +35,11 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-
-            App()
-
+            QuotesAppTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    App()
+                }
+            }
         }
     }
 
@@ -62,8 +61,14 @@ fun App(){
             modifier = Modifier.fillMaxSize(1f),
             contentAlignment = Alignment.Center)
         {
-            Text(text = "Loading..",
-                style = MaterialTheme.typography.labelSmall)
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                CircularProgressIndicator()
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = "Loading inspirational quotes...",
+                    style = MaterialTheme.typography.labelLarge
+                )
+            }
         }
     }
 }
